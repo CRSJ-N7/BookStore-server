@@ -8,8 +8,8 @@ import { getMe } from "../controllers/user/getMe";
 const router = Router();
 
 router.get("/", getUsers);
-router.post("/", createUser);
-router.post("/login", loginUser);
+router.post("/auth/sign-up", createUser);
+router.post("/auth/sign-in", loginUser);
 router.post("/me", authMiddleware, getMe);
 
 export default router;
