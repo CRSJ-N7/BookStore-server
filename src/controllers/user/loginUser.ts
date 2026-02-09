@@ -3,7 +3,7 @@ import jwt from "jsonwebtoken";
 import userRepository from "../../db/userRepository";
 import bcrypt from "bcrypt";
 
-const JWT_SECRET = process.env.JWT_SECRET || "supersecret";
+const JWT_SECRET = process.env.JWT_SECRET || "terrifclyTOP-SECRETkey";
 
 type LoginReq = {
   email: string;
