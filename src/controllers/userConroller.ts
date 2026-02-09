@@ -5,8 +5,9 @@ import { CreateUserDto } from "../dto/CreateUserDto";
 
 export const getUsers = async (
   req: Request,
-  res: Response<UserResponseDto[] | UserResponseDto>,
+  res: Response<UserResponseDto[] | UserResponseDto | { message: string }>,
 ) => {
+  console.log("зашли");
   const users = await userRepository.find();
 
   const response: UserResponseDto[] = users.map((user) => ({
@@ -14,6 +15,10 @@ export const getUsers = async (
     name: user.name,
     email: user.email,
   }));
+
+  if (!response.length) {
+    return res.json({ message: "no users found" });
+  }
   return res.status(200).json(response);
 };
 
