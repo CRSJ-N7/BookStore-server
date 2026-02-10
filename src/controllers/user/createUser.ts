@@ -16,6 +16,14 @@ export const createUser = async (
       .json({ message: "все поля обязательны к заполнению" });
   }
 
+  if (typeof name !== "string") {
+    return res.status(400).json({ message: "poshel nahuy, mne nujen string" });
+  }
+
+  if (!isNaN(+name)) {
+    return res.status(400).json({ message: "наебать меня решил?" });
+  }
+
   if (typeof email !== "string" || !email.includes("@")) {
     return res.status(400).json({ message: "email не валиден" });
   }

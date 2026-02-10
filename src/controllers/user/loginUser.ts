@@ -12,7 +12,7 @@ type LoginReq = {
 
 export const loginUser = async (
   req: Request<{}, {}, LoginReq>,
-  res: Response,
+  res: Response, // а можно ли response здесь типизировать? или не надо?
 ) => {
   const { email, password } = req.body;
 
@@ -26,7 +26,7 @@ export const loginUser = async (
     return res.status(400).json({ message: "неверный пароль" });
   }
 
-  const token = jwt.sign({ userId: user.id }, JWT_SECRET, { expiresIn: "24h" });
+  const token = jwt.sign({ userId: user.id }, JWT_SECRET, { expiresIn: "1h" });
 
   return res.status(200).json({ token });
 };
