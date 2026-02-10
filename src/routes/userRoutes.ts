@@ -10,6 +10,6 @@ const router = Router();
 router.get("/", getUsers);
 router.post("/auth/sign-up", createUser);
 router.post("/auth/sign-in", loginUser);
-router.post("/me", authMiddleware, getMe);
+router.get("/me", authMiddleware, getMe);
 
 export default router;

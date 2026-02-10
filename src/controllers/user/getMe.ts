@@ -7,6 +7,7 @@ export const getMe = async (
   req: AuthRequest,
   res: Response<UserResponseDto | { message: string }>,
 ) => {
+  console.log("зашли в get me");
   const { userId } = req;
   const user = await userRepository.findOne({ where: { id: userId } });
 
