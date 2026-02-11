@@ -1,8 +1,6 @@
 import { Request, Response } from "express";
-import jwt from "jsonwebtoken";
 import userRepository from "../../db/userRepository";
 import bcrypt from "bcrypt";
-import { config } from "../../config/config";
 import { signJWT } from "../../jwt/jwt";
 
 type LoginReq = {

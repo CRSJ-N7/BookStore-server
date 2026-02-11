@@ -10,7 +10,8 @@ export const signJWT = (userId: number): string => {
 };
 
 export const verifyJWT = (token: string): { userId: number } => {
-  return jwt.verify(token, config.jwt.secret) as { userId: number };
+  const verified = jwt.verify(token, config.jwt.secret) as { userId: number };
+  return verified;
 };
 
 export const refreshToken = () => {};
