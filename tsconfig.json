@@ -5,8 +5,40 @@
     "rootDir": "src",
     "outDir": "dist",
     "strict": true,
+    "strictPropertyInitialization": false,
     "esModuleInterop": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true
   }
 }
+
+// {
+// "compilerOptions": {
+// "module": "CommonJS",
+// "target": "ES6",
+// "sourceMap": true,
+// "declaration": true,
+// "declarationMap": true,
+// "noEmitOnError": true,
+// "skipLibCheck": true,
+// "esModuleInterop": true,
+// "emitDecoratorMetadata": true,
+// "experimentalDecorators": true,
+// "resolveJsonModule": true,
+// "lib": ["ES2021.String"],
+// "types": [
+// "jest",
+// "/jest"
+// ],
+// "baseUrl": ".",
+// "rootDir": "./src",
+// "noEmit": false,
+// "outDir": "./build"
+// },
+// "exclude": [
+// "build"
+// ],
+// "include": [
+// "src/*/"
+// ]
+// }

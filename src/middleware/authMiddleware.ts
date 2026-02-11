@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import jwt from "jsonwebtoken";
-
-const JWT_SECRET = process.env.JWT_SECRET || "terrifclyTOP-SECRETkey";
+import { config } from "../config/config";
+import { verifyJWT } from "../jwt/jwt";
 
 export interface AuthRequest extends Request {
   userId?: number;
@@ -26,7 +26,7 @@ export const authMiddleware = (
   }
   console.log(token);
   try {
-    const payload = jwt.verify(token, JWT_SECRET) as { userId: number };
+    const payload = verifyJWT(token);
     req.userId = payload.userId;
     console.log("зашли в try/catch payload. далее - next()");
     next();

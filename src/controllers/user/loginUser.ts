@@ -2,8 +2,8 @@ import { Request, Response } from "express";
 import jwt from "jsonwebtoken";
 import userRepository from "../../db/userRepository";
 import bcrypt from "bcrypt";
-
-const JWT_SECRET = process.env.JWT_SECRET || "terrifclyTOP-SECRETkey";
+import { config } from "../../config/config";
+import { signJWT } from "../../jwt/jwt";
 
 type LoginReq = {
   email: string;
@@ -12,7 +12,7 @@ type LoginReq = {
 
 export const loginUser = async (
   req: Request<{}, {}, LoginReq>,
-  res: Response, // а можно ли response здесь типизировать? или не надо?
+  res: Response,
 ) => {
   const { email, password } = req.body;
 
@@ -26,7 +26,7 @@ export const loginUser = async (
     return res.status(400).json({ message: "неверный пароль" });
   }
 
-  const token = jwt.sign({ userId: user.id }, JWT_SECRET, { expiresIn: "1h" });
+  const token = signJWT(user.id);
 
   return res.status(200).json({ token });
 };
