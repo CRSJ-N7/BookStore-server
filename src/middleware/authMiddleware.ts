@@ -1,14 +1,8 @@
 import { NextFunction, Request, Response } from "express";
-import jwt from "jsonwebtoken";
-import { config } from "../config/config";
 import { verifyJWT } from "../jwt/jwt";
 
-export interface AuthRequest extends Request {
-  userId?: number;
-}
-
 export const authMiddleware = (
-  req: AuthRequest,
+  req: Request,
   res: Response,
   next: NextFunction,
 ) => {
