@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import userRepository from "../../db/userRepository";
 import bcrypt from "bcrypt";
-import { signJWT } from "../../jwt/jwt";
+import { signAccessJWT, signRefreshJWT } from "../../jwt/jwt";
 
 type LoginReq = {
   email: string;
@@ -24,7 +24,8 @@ export const loginUser = async (
     return res.status(400).json({ message: "неверный пароль" });
   }
 
-  const token = signJWT(user.id);
+  const accessToken = signAccessJWT(user.id);
+  const refreshToken = signRefreshJWT(user.id);
 
-  return res.status(200).json({ token });
+  return res.status(200).json({ accessToken, refreshToken });
 };

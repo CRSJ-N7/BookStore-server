@@ -4,6 +4,7 @@ import { createUser } from "../controllers/user/createUser";
 import { loginUser } from "../controllers/user/loginUser";
 import { authMiddleware } from "../middleware/authMiddleware";
 import { getMe } from "../controllers/user/getMe";
+import { refreshToken } from "../controllers/user/refreshToken";
 
 const router = Router();
 
@@ -11,5 +12,6 @@ router.get("/", getUsers);
 router.post("/auth/sign-up", createUser);
 router.post("/auth/sign-in", loginUser);
 router.get("/me", authMiddleware, getMe);
+router.post("/refresh", refreshToken);
 
 export default router;

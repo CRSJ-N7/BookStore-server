@@ -18,6 +18,7 @@ export const config = {
     secret: process.env.JWT_SECRET || "super-terrifclyTOP-key",
     accessExpiresIn:
       (process.env.ACCESS_EXPIRES_IN as SignOptions["expiresIn"]) || "1h",
-    refreshExpiresIn: process.env.REFRESH_EXPIRES_IN || "7d",
+    refreshExpiresIn:
+      (process.env.REFRESH_EXPIRES_IN as SignOptions["expiresIn"]) || "15d",
   },
 };

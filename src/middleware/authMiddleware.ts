@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import { verifyJWT } from "../jwt/jwt";
+import { verifyAccessJWT } from "../jwt/jwt";
 
 export const authMiddleware = (
   req: Request,
@@ -20,7 +20,7 @@ export const authMiddleware = (
   }
   console.log(token);
   try {
-    const payload = verifyJWT(token);
+    const payload = verifyAccessJWT(token);
     req.userId = payload.userId;
     console.log("зашли в try/catch payload. далее - next()");
     next();
