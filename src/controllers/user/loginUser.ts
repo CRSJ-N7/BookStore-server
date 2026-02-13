@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import userRepository from "../../db/userRepository";
 import bcrypt from "bcrypt";
 import { signAccessJWT, signRefreshJWT } from "../../jwt/jwt";
+import { UserResponseDto } from "../../dto/UserResponseDto";
 
 type LoginReq = {
   email: string;
@@ -27,5 +28,11 @@ export const loginUser = async (
   const accessToken = signAccessJWT(user.id);
   const refreshToken = signRefreshJWT(user.id);
 
-  return res.status(200).json({ accessToken, refreshToken });
+  const safeUser = {
+    id: user.id,
+    name: user.name,
+    email: user.email,
+  };
+
+  return res.status(200).json({ accessToken, refreshToken, safeUser });
 };

@@ -6,6 +6,7 @@ export const authMiddleware = (
   res: Response,
   next: NextFunction,
 ) => {
+  console.log(req.headers, req.headers.authorization);
   if (!req.headers || !req.headers.authorization) {
     return res
       .status(401)

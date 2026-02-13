@@ -2,6 +2,14 @@ import { Request, Response } from "express";
 import app from "./app";
 import { AppDataSource } from "./data-source";
 import { config } from "./config/config";
+import cors from "cors";
+
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+    credentials: true,
+  }),
+);
 
 app.get("/", (req: Request, res: Response) => {
   res.send("Hello World!");

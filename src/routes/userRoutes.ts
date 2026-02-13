@@ -10,7 +10,7 @@ const router = Router();
 
 router.get("/", getUsers);
 router.post("/auth/sign-up", createUser);
-router.post("/auth/sign-in", loginUser);
+router.post("/auth/login", loginUser);
 router.get("/me", authMiddleware, getMe);
 router.post("/refresh", refreshToken);
 
