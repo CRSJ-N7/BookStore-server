@@ -8,20 +8,12 @@ export const createUser = async (
   req: Request<{}, {}, CreateUserDto>,
   res: Response<UserResponseDto | { message: string }>,
 ) => {
-  const { name, email, password } = req.body;
+  const { email, password } = req.body;
 
-  if (!name || !email || !password) {
+  if (!email || !password) {
     return res
       .status(400)
       .json({ message: "все поля обязательны к заполнению" });
-  }
-
-  if (typeof name !== "string") {
-    return res.status(400).json({ message: "poshel nahuy, mne nujen string" });
-  }
-
-  if (!isNaN(+name)) {
-    return res.status(400).json({ message: "наебать меня решил?" });
   }
 
   if (typeof email !== "string" || !email.includes("@")) {
@@ -38,7 +30,6 @@ export const createUser = async (
   const hashedPassword = await bcrpyt.hash(password, 10);
 
   const newUser = userRepository.create({
-    name,
     email,
     password: hashedPassword,
   });
@@ -47,7 +38,6 @@ export const createUser = async (
 
   const safeUser: UserResponseDto = {
     id: newUser.id,
-    name: newUser.name,
     email: newUser.email,
   };
 
