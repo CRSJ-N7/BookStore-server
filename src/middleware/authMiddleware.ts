@@ -26,6 +26,7 @@ export const authMiddleware = (
     console.log("зашли в try/catch payload. далее - next()");
     next();
   } catch (error) {
+    console.log("зашли в ошибку. Какого хуя?", error);
     return res.status(400).json({ message: "Not valid token" });
   }
 };
