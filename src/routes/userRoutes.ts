@@ -5,6 +5,8 @@ import { loginUser } from "../controllers/user/loginUser";
 import { authMiddleware } from "../middleware/authMiddleware";
 import { getMe } from "../controllers/user/getMe";
 import { refreshToken } from "../controllers/user/refreshToken";
+import { updateUserInfo } from "../controllers/user/updateUserInfo";
+import { updateUserPassword } from "../controllers/user/updatePassword";
 
 const router = Router();
 
@@ -13,5 +15,7 @@ router.post("/auth/sign-up", createUser);
 router.post("/auth/login", loginUser);
 router.get("/me", authMiddleware, getMe);
 router.post("/refresh", refreshToken);
+router.put("/me/update", authMiddleware, updateUserInfo);
+router.put("/me/password", authMiddleware, updateUserPassword);
 
 export default router;
