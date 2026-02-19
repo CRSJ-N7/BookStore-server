@@ -32,6 +32,7 @@ export const loginUser = async (
     id: user.id,
     name: user.name,
     email: user.email,
+    avatar: user.avatar,
   };
 
   return res.status(200).json({ accessToken, refreshToken, safeUser });

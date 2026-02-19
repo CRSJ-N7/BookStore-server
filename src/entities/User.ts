@@ -14,9 +14,6 @@ export class User {
   @Column({ type: "varchar", nullable: false })
   password: string;
 
-  // @Column({ type: "varchar", nullable: true, unique: false })
-  // /**
-  //  * @example "/public/avatars/asdasdasdasdasd.png"
-  //  */
-  // avatar: string | null;
+  @Column({ type: "varchar", nullable: true, unique: false })
+  avatar: string | null;
 }

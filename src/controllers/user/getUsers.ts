@@ -19,5 +19,6 @@ export const getUsers = async (
   if (!response.length) {
     return res.json({ message: "no users found" });
   }
+  console.log("say hay here");
   return res.status(200).json(response);
 };

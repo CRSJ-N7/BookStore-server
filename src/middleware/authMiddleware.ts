@@ -6,7 +6,6 @@ export const authMiddleware = (
   res: Response,
   next: NextFunction,
 ) => {
-  console.log(req.headers, req.headers.authorization);
   if (!req.headers || !req.headers.authorization) {
     return res
       .status(401)
@@ -19,11 +18,10 @@ export const authMiddleware = (
   if (!token) {
     return res.status(401).json({ message: "no token found" });
   }
-  console.log(token);
   try {
     const payload = verifyAccessJWT(token);
     req.userId = payload.userId;
-    console.log("зашли в try/catch payload. далее - next()");
+    console.log(`ошибки нет, далее - next() с id:${req.userId}`);
     next();
   } catch (error) {
     console.log("зашли в ошибку. Какого хуя?", error);

@@ -16,8 +16,9 @@ export const getMe = async (
 
   const safeUser = {
     id: user.id,
-    name: user.name,
     email: user.email,
+    name: user.name,
+    avatar: user.avatar,
   };
 
   res.status(200).json(safeUser);
