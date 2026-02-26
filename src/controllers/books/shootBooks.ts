@@ -2,13 +2,28 @@ import { Request, Response } from "express";
 import fs from "fs";
 import path from "path";
 import bookRepository from "../../db/bookRepository";
-import { Book } from "../../entities/Book";
 
-export const shootBooks = async (
-  req: Request<Omit<Book, "id">>,
-  res: Response<Omit<Book, "id">>,
-) => {
-  const { author, cover, price, description, genre, name } = req.body;
+export const shootBooks = async (req: Request, res: Response) => {
+  console.log("зашли в shooBooks");
+  const { author } = req.body;
+  console.log(author);
+  const { price } = req.body;
+  console.log(price);
+
+  const { description } = req.body;
+  console.log(description);
+
+  const { genre } = req.body;
+  console.log(genre);
+
+  const { name } = req.body;
+  console.log(name);
+
+  const { cover } = req.body;
+
+  // if (!author || !price || !description || !genre || !name || !cover) {
+  //   return res.status(400);
+  // }
 
   const base64data = cover.split(",")[1];
   const buffer = Buffer.from(base64data, "base64");
@@ -19,7 +34,7 @@ export const shootBooks = async (
     fs.mkdirSync(uploadDir);
   }
 
-  const fileName = `book-${name}-${crypto.randomUUID()}`;
+  const fileName = `book-${name}-${crypto.randomUUID()}.png`;
   const filePath = path.join(uploadDir, fileName);
 
   fs.writeFileSync(filePath, buffer);

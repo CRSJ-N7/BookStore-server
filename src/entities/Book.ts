@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { CartItem } from "./CartItem";
 
 @Entity()
 export class Book {
@@ -22,4 +23,7 @@ export class Book {
 
   @Column({ type: "float", nullable: true, unique: false })
   price: number;
+
+  @OneToMany(() => CartItem, (cartItem) => cartItem.book)
+  cartItems: CartItem[];
 }

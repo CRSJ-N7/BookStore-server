@@ -4,6 +4,7 @@ import "dotenv/config";
 import { User } from "./entities/User";
 import { config } from "./config/config";
 import { Book } from "./entities/Book";
+import { CartItem } from "./entities/CartItem";
 
 export const AppDataSource = new DataSource({
   type: "postgres",
@@ -14,7 +15,7 @@ export const AppDataSource = new DataSource({
   database: config.db.database,
   synchronize: false,
   logging: false,
-  entities: [User, Book],
+  entities: [User, Book, CartItem],
   migrationsTableName: "my_migrations",
   migrations: [__dirname + "/migrations/**/*{.js,.ts}"],
   subscribers: [],
