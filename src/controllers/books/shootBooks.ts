@@ -34,7 +34,7 @@ export const shootBooks = async (req: Request, res: Response) => {
     fs.mkdirSync(uploadDir);
   }
 
-  const fileName = `book-${name}-${crypto.randomUUID()}.png`;
+  const fileName = `book-${name}-${crypto.randomUUID()}.png`; // НИКОГДА НАХУЙ БОЛЬШЕ ИМЯ КНИГИ МЫ СЮДА НЕ СУËМ
   const filePath = path.join(uploadDir, fileName);
 
   fs.writeFileSync(filePath, buffer);
