@@ -4,7 +4,7 @@ import bookRepository from "../../db/bookRepository";
 
 export const toggleFavourites = async (req: Request, res: Response) => {
   const { userId } = req;
-  const { bookId } = req.body;
+  const { bookId } = req.params;
 
   if (!userId) {
     return res.status(401).json({ message: "Unauthorized" });
@@ -23,7 +23,7 @@ export const toggleFavourites = async (req: Request, res: Response) => {
     return res.status(404).json({ message: "User not found" });
   }
 
-  const book = await bookRepository.findOne({ where: { id: bookId } });
+  const book = await bookRepository.findOne({ where: { id: +bookId } });
 
   if (!book) {
     return res.status(404).json({ message: "Book not found" });
