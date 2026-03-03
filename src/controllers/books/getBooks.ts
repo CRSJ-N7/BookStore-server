@@ -3,7 +3,6 @@ import bookRepository from "../../db/bookRepository";
 
 export const getBooks = async (req: Request, res: Response) => {
   const params = req.query;
-  console.log("zashli");
   if (!params) {
     return res.json({ message: "no search params" });
   }

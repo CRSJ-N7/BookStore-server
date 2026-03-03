@@ -1,5 +1,13 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import {
+  Column,
+  Entity,
+  JoinTable,
+  ManyToMany,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from "typeorm";
 import { CartItem } from "./CartItem";
+import { Book } from "./Book";
 
 @Entity()
 export class User {
@@ -17,6 +25,10 @@ export class User {
 
   @Column({ type: "varchar", nullable: true, unique: false })
   avatar: string | null;
+
+  @ManyToMany(() => Book, (book) => book.favouritedBy)
+  @JoinTable()
+  favourites: Book[];
 
   @OneToMany(() => CartItem, (cartItem) => cartItem.user)
   cartItems: CartItem[];
