@@ -9,7 +9,6 @@ export const getBooks = async (req: Request, res: Response) => {
   }
 
   const keys = Object.entries(req.query);
-  console.log(keys);
 
   const bR = bookRepository.createQueryBuilder("book");
 
@@ -33,35 +32,20 @@ export const getBooks = async (req: Request, res: Response) => {
       bR.andWhere("book.genre IN (:...genres)", { genres: values });
     }
     if (key === "sortBy") {
-      switch (value) {
-        case "Name":
-          bR.orderBy({
-            "book.name": "ASC",
-          });
-          break;
-        case "Author name":
-          bR.orderBy({
-            "book.author": "ASC",
-          });
-          break;
-        case "Price":
-          bR.orderBy({
-            "book.price": "ASC",
-          });
-          break;
-        default:
-          break;
-        // case "Rating":
-        //   bR.orderBy({
-        //     "book."
-        //   })
-      }
+      const keys = {
+        Name: "name",
+        "Author name": "author",
+        Price: "price",
+      } as any;
+
+      const orderKey = keys[value as string] || "id";
+      bR.orderBy({
+        [orderKey]: "ASC",
+      });
     }
   }
 
   const filteredBooks = await bR.getMany();
-
-  // const books = await bookRepository.find();
 
   return res.status(200).json(filteredBooks);
 };

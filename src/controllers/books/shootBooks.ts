@@ -6,19 +6,10 @@ import bookRepository from "../../db/bookRepository";
 export const shootBooks = async (req: Request, res: Response) => {
   console.log("зашли в shooBooks");
   const { author } = req.body;
-  console.log(author);
   const { price } = req.body;
-  console.log(price);
-
   const { description } = req.body;
-  console.log(description);
-
   const { genre } = req.body;
-  console.log(genre);
-
   const { name } = req.body;
-  console.log(name);
-
   const { cover } = req.body;
 
   // if (!author || !price || !description || !genre || !name || !cover) {

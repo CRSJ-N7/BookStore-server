@@ -1,6 +1,7 @@
 import express from "express";
 import userRouter from "./routes/userRoutes";
 import bookRouter from "./routes/booksRoutes";
+import cartRouter from "./routes/cartRoutes";
 import cors from "cors";
 
 const app = express();
@@ -17,6 +18,7 @@ app.use("/uploads", express.static("uploads"));
 app.use("/public", express.static("public"));
 app.use("/users", userRouter);
 app.use("/books", bookRouter);
+app.use("/cart", cartRouter);
 
 // TOOD: error handler
 
