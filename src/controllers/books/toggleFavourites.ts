@@ -6,6 +6,8 @@ export const toggleFavourites = async (req: Request, res: Response) => {
   const { userId } = req;
   const { bookId } = req.params;
 
+  console.log("bookId:", bookId);
+
   if (!userId) {
     return res.status(401).json({ message: "Unauthorized" });
   }

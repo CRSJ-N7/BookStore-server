@@ -1,0 +1,20 @@
+import { MigrationInterface, QueryRunner } from "typeorm";
+
+export class ChangedFieldInUserEntity1772691462050 implements MigrationInterface {
+    name = 'ChangedFieldInUserEntity1772691462050'
+
+    public async up(queryRunner: QueryRunner): Promise<void> {
+        await queryRunner.query(`ALTER TABLE "rate" DROP CONSTRAINT "FK_7440b44c5acbec8b2ebfc3af7d2"`);
+        await queryRunner.query(`ALTER TABLE "rate" DROP CONSTRAINT "FK_dc0ed8cca45796530b3654fc4cd"`);
+        await queryRunner.query(`ALTER TABLE "rate" ADD CONSTRAINT "FK_7440b44c5acbec8b2ebfc3af7d2" FOREIGN KEY ("userId") REFERENCES "user"("id") ON DELETE CASCADE ON UPDATE NO ACTION`);
+        await queryRunner.query(`ALTER TABLE "rate" ADD CONSTRAINT "FK_dc0ed8cca45796530b3654fc4cd" FOREIGN KEY ("bookId") REFERENCES "book"("id") ON DELETE CASCADE ON UPDATE NO ACTION`);
+    }
+
+    public async down(queryRunner: QueryRunner): Promise<void> {
+        await queryRunner.query(`ALTER TABLE "rate" DROP CONSTRAINT "FK_dc0ed8cca45796530b3654fc4cd"`);
+        await queryRunner.query(`ALTER TABLE "rate" DROP CONSTRAINT "FK_7440b44c5acbec8b2ebfc3af7d2"`);
+        await queryRunner.query(`ALTER TABLE "rate" ADD CONSTRAINT "FK_dc0ed8cca45796530b3654fc4cd" FOREIGN KEY ("bookId") REFERENCES "book"("id") ON DELETE NO ACTION ON UPDATE NO ACTION`);
+        await queryRunner.query(`ALTER TABLE "rate" ADD CONSTRAINT "FK_7440b44c5acbec8b2ebfc3af7d2" FOREIGN KEY ("userId") REFERENCES "user"("id") ON DELETE NO ACTION ON UPDATE NO ACTION`);
+    }
+
+}

@@ -35,9 +35,11 @@ export const getBooks = async (req: Request, res: Response) => {
         Name: "name",
         "Author name": "author",
         Price: "price",
+        Rating: "avgRating",
       } as any;
 
       const orderKey = keys[value as string] || "id";
+      console.log(orderKey, "orderkey");
       bR.orderBy({
         [orderKey]: "ASC",
       });

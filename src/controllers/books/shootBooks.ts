@@ -40,6 +40,5 @@ export const shootBooks = async (req: Request, res: Response) => {
   };
 
   await bookRepository.save(book);
-
   return res.status(201).json(book);
 };

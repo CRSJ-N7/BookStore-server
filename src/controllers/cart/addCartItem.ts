@@ -37,7 +37,10 @@ export const addCartItem = async (req: Request, res: Response) => {
 
   await cartRepository.save(cartItem);
 
-  return res.status(201).json({
-    message: `User: ${cartItem.user.id} added book: ${cartItem.book.name} to cart `,
-  });
+  return res
+    .status(201)
+    .json({
+      cartItem,
+      message: `User: ${cartItem.user.id} added book: ${cartItem.book.name} to cart `,
+    });
 };

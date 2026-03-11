@@ -20,6 +20,4 @@ app.use("/users", userRouter);
 app.use("/books", bookRouter);
 app.use("/cart", cartRouter);
 
-// TOOD: error handler
-
 export default app;

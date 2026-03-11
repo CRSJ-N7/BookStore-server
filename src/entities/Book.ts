@@ -7,6 +7,8 @@ import {
 } from "typeorm";
 import { CartItem } from "./CartItem";
 import { User } from "./User";
+import { Rate } from "./Rate";
+import { Comment } from "./Comment";
 
 @Entity()
 export class Book {
@@ -31,9 +33,18 @@ export class Book {
   @Column({ type: "float", nullable: true, unique: false })
   price: number;
 
+  @Column({ type: "float", default: 0 })
+  avgRating: number;
+
   @ManyToMany(() => User, (user) => user.favourites)
   favouritedBy: User[];
 
   @OneToMany(() => CartItem, (cartItem) => cartItem.book)
   cartItems: CartItem[];
+
+  @OneToMany(() => Rate, (rate) => rate.book)
+  rates: Rate[];
+
+  @OneToMany(() => Comment, (comment) => comment.book)
+  comments: Comment[];
 }
