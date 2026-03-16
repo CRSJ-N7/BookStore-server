@@ -35,7 +35,7 @@ export const getBooks = async (req: Request, res: Response) => {
         Name: "name",
         "Author name": "author",
         Price: "price",
-        Rating: "avgRating",
+        Rating: '"avgRating"',
       } as any;
 
       const orderKey = keys[value as string] || "id";
@@ -46,7 +46,17 @@ export const getBooks = async (req: Request, res: Response) => {
     }
   }
 
-  const filteredBooks = await bR.getMany();
+  const page = Number(req.query.page) || 1;
+  const booksPerPage = 12;
+  const skip = (page - 1) * booksPerPage;
 
-  return res.status(200).json(filteredBooks);
+  bR.skip(skip).take(booksPerPage);
+
+  const [filteredBooks, total] = await bR.getManyAndCount();
+
+  return res.status(200).json({
+    filteredBooks,
+    total,
+    totalPages: Math.ceil(total / booksPerPage),
+  });
 };
