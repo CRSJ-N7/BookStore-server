@@ -5,13 +5,6 @@ export const updateQuantity = async (req: Request, res: Response) => {
   const { userId } = req;
   const { bookId, quantity } = req.body;
 
-  if (!userId) {
-    return res.status(401).json({ message: "Unauthorized" });
-  }
-  if (quantity < 0) {
-    return res.status(400).json({ message: "Quantity cannot be negative" });
-  }
-
   const item = await cartRepository.findOne({
     where: { user: { id: userId }, book: { id: bookId } },
   });

@@ -11,9 +11,9 @@ import { rateBook } from "../controllers/books/rateBook";
 import { getBookComments } from "../controllers/books/getBookComments";
 import { createComment } from "../controllers/books/createComment";
 import { validate } from "../middleware/validate";
-import commentSchema from "../validation/books/commentSchema";
-import booksId from "../validation/books/booksId";
-import rateValue from "../validation/books/rateValue";
+import commentSchema from "../validation/commentSchema";
+import booksId from "../validation/booksId";
+import rateValue from "../validation/rateValue";
 
 const router = Router();
 
