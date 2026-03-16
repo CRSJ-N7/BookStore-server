@@ -8,12 +8,6 @@ export const getGenres = async (req: Request, res: Response) => {
     .distinct(true)
     .getRawMany();
 
-  //   const genres = genresData.reduce((acc, item) => {
-  //     const newGenre = Object.values(item);
-  //     acc.push(newGenre[0]);
-  //     return acc;
-  //   }, []);
-
   const genres = genresData.map((item) => item.genre);
 
   return res.status(200).json(genres);

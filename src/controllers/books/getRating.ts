@@ -4,10 +4,6 @@ import bookRepository from "../../db/bookRepository";
 export const getBookRating = async (req: Request, res: Response) => {
   const { bookId } = req.params;
 
-  if (!bookId) {
-    return res.status(400).json({ message: "Book id required" });
-  }
-
   const book = await bookRepository.findOne({
     where: { id: Number(bookId) },
     select: ["id", "avgRating"],

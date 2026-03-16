@@ -6,16 +6,6 @@ export const toggleFavourites = async (req: Request, res: Response) => {
   const { userId } = req;
   const { bookId } = req.params;
 
-  console.log("bookId:", bookId);
-
-  if (!userId) {
-    return res.status(401).json({ message: "Unauthorized" });
-  }
-
-  if (!bookId) {
-    return res.status(400).json({ message: "Book id not found in req.body" });
-  }
-
   const user = await userRepository.findOne({
     where: { id: userId },
     relations: ["favourites"],

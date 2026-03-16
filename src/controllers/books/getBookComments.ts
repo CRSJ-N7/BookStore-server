@@ -2,12 +2,10 @@ import { Request, Response } from "express";
 import commentRepository from "../../db/commentRepository";
 
 export const getBookComments = async (req: Request, res: Response) => {
-  const { id } = req.params;
-
-  console.log("getComments:", id);
+  const { bookId } = req.params;
 
   const comments = await commentRepository.find({
-    where: { book: { id: +id } },
+    where: { book: { id: +bookId } },
     relations: {
       user: true,
     },
@@ -15,8 +13,6 @@ export const getBookComments = async (req: Request, res: Response) => {
       createdAt: "ASC",
     },
   });
-
-  console.log(comments);
 
   return res.json(comments);
 };

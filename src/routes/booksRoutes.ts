@@ -10,20 +10,31 @@ import { getBookRating } from "../controllers/books/getRating";
 import { rateBook } from "../controllers/books/rateBook";
 import { getBookComments } from "../controllers/books/getBookComments";
 import { createComment } from "../controllers/books/createComment";
-import { updateQuantity } from "../controllers/cart/updateQuantity";
 import { validate } from "../middleware/validate";
 import commentSchema from "../validation/books/commentSchema";
+import booksId from "../validation/books/booksId";
+import rateValue from "../validation/books/rateValue";
 
 const router = Router();
 
 router.post("/shoot", shootBooks);
 router.get("/", getBooks);
 router.get("/genres", getGenres);
-router.get("/comments/:id", getBookComments);
-router.get("/:id/rating", getBookRating);
+router.get("/comments/:bookId", validate({ params: booksId }), getBookComments);
+router.get("/:bookId/rating", validate({ body: rateValue }), getBookRating);
 router.get("/favourites", authMiddleware, getFavourites);
-router.patch("/favourites/:bookId", authMiddleware, toggleFavourites);
-router.patch("/rate/:id", authMiddleware, rateBook);
+router.patch(
+  "/favourites/:bookId",
+  authMiddleware,
+  validate({ params: booksId }),
+  toggleFavourites,
+);
+router.patch(
+  "/rate/:bookId",
+  authMiddleware,
+  validate({ body: booksId }),
+  rateBook,
+);
 router.post(
   "/comments",
   authMiddleware,
@@ -31,6 +42,6 @@ router.post(
   createComment,
 );
 
-router.get("/:id", getBook);
+router.get("/:bookId", validate({ params: booksId }), getBook);
 
 export default router;

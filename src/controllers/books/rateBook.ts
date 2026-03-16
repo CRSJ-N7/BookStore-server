@@ -7,16 +7,6 @@ export const rateBook = async (req: Request, res: Response) => {
   const { userId } = req;
   const { rateValue, bookId } = req.body;
 
-  console.log(`Rate value:`, rateValue, "bookId:", bookId);
-
-  if (!bookId) {
-    return res.status(400).json({ message: "Book id required" });
-  }
-
-  if (rateValue < 1 || rateValue > 5) {
-    return res.status(400).json({ message: "Rate must be between 1 and 5" });
-  }
-
   const user = await userRepository.findOne({ where: { id: userId } });
   const book = await bookRepository.findOne({ where: { id: bookId } });
 

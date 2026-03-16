@@ -7,12 +7,6 @@ export const createComment = async (req: Request, res: Response) => {
   const { userId } = req;
   const { text, bookId } = req.body;
 
-  console.log("CreateComment:", userId, text, bookId);
-
-  if (!text) {
-    return res.status(400).json({ message: "Text required" });
-  }
-
   const user = await userRepository.findOne({
     where: { id: userId },
   });

@@ -10,6 +10,7 @@ type Schemas = {
 export const validate =
   (schemas: Schemas) =>
   async (req: Request, res: Response, next: NextFunction) => {
+    console.log("ONO RABOTAET!");
     try {
       if (schemas.body) {
         await schemas.body.validate(req.body, { abortEarly: false });
